@@ -35,5 +35,14 @@ module Enumerable
 
     false
   end
-end
 
+  def my_map
+    modified_array = []
+
+    self.my_each do |i|
+      modified_array << yield(i)
+    end
+
+    modified_array
+  end
+end
