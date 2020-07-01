@@ -25,5 +25,15 @@ module Enumerable
 
     true
   end
+
+  def my_any?
+    return to_enum(:my_each_with_index) unless block_given?
+    
+    self.my_each do |i|
+      return true if yield(i)
+    end
+
+    false
+  end
 end
 
