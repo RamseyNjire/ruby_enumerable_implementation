@@ -9,10 +9,21 @@ module Enumerable
 
   def my_each_with_index
     return to_enum(:my_each_with_index) unless block_given?
+
     self.my_each do |i|
       yield(i, self.index(i))
     end
     self
+  end
+
+  def my_all?
+    return to_enum(:my_each_with_index) unless block_given?
+    
+    self.my_each do |i|
+      return false unless yield(i)
+    end
+
+    true
   end
 end
 
