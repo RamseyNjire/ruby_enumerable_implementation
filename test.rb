@@ -47,4 +47,4 @@ p longest
 p my_array
 
 puts '==========================this is multiply_els method'
-pmy_array.multiply_els
+p my_array.multiply_els

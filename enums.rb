@@ -84,25 +84,19 @@ module Enumerable
     modified_array
   end
 
-  def my_inject(*args)
-    arr = to_a
+  def my_inject(*arg)
+    raise LocalJumpError unless block_given? || !arg.empty?
+
+    sym = arg.pop unless block_given?
+    my_array = arg + to_a
+    memo = my_array.shift
     if block_given?
-      if args.empty?
-        acc = arr.first
-        arr[1, arr.size].each do |e|
-          acc = yield(acc, e)
-        end
-      else
-        acc = args[0]
-        arr.each do |e|
-          acc = yield(acc, e)
-        end
-      end
+      my_array.my_each { |el| memo = yield(memo, el) }
     else
-      to_enum
+      my_array.my_each { |el| memo = memo.send(sym, el) }
     end
-    acc
-  end
+    memo
+  end  
 
   def multiply_els
     my_inject { |i, a| i * a }
