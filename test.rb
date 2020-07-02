@@ -4,8 +4,26 @@ require_relative 'enums.rb'
 
 my_array = [1, 2, 3, 4, 5]
 my_hash = { x: 1, y: 2, z: 3 }
+my_text = %w[ant bear cat]
 
-puts '======this is my each method======='
+puts '==========================this is my each method'
 p my_array.my_each
 p(my_hash.my_each { |value| p value })
 p((1..10).my_each { |value| p value })
+
+
+puts '==========================this is my_select method'
+p(my_array.my_select { |value| value > 3 })
+p(my_hash.my_select { |_key, value| value > 1 })
+p((1..10).my_select { |value| value > 6 })
+
+puts '---------------------------my_none?'
+p(%w[ant bear cat].my_none? { |word| word.length == 5 })
+p(%w[ant bear cat].my_none? { |word| word.length >= 4 })
+p(%w[ant bear cat].my_none?(/d/))
+p([1, 3.14, 42].my_none?(Float))
+p([].my_none?)
+p([nil].my_none?)
+p([nil, false].my_none?)
+p([nil, false, true].my_none?)
+p(%w[ant bear cat].none?(/d/) { |word| word.length >= 4 })
