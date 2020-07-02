@@ -59,6 +59,22 @@ module Enumerable
     true
   end
 
+  def my_count (arg=nil)
+    count=[]
+    if block_given?
+      self.my_each do |i|
+        count.push(yield(i))
+      end
+    elsif arg !=nil
+      self.my_select do |i|
+        count<<arg if arg==1
+      end
+    else
+      self.length if arg==nil
+    end
+
+  end
+
   def my_map
     modified_array = []
 

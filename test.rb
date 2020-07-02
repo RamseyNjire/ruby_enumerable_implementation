@@ -17,7 +17,7 @@ p(my_array.my_select { |value| value > 3 })
 p(my_hash.my_select { |_key, value| value > 1 })
 p((1..10).my_select { |value| value > 6 })
 
-puts '---------------------------my_none?'
+puts '==========================this is my_none? method'
 p(%w[ant bear cat].my_none? { |word| word.length == 5 })
 p(%w[ant bear cat].my_none? { |word| word.length >= 4 })
 p(%w[ant bear cat].my_none?(/d/))
@@ -27,3 +27,11 @@ p([nil].my_none?)
 p([nil, false].my_none?)
 p([nil, false, true].my_none?)
 p(%w[ant bear cat].none?(/d/) { |word| word.length >= 4 })
+
+
+puts '==========================this is my_count method'
+p(my_array.my_count)
+p(my_array.my_count(2))
+p(my_array.my_count { |x| (x % 2).zero? })
+p(my_array.my_count(2) { |value| value })
+p((1..10).my_count { |x| (x % 2).zero? })
