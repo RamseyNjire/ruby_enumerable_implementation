@@ -1,7 +1,7 @@
 # Ruby Enumerable Module Partial Implementation
 
 
-[![Generic badge](https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg)](https://shields.io/)
+[![forthebadge](https://forthebadge.com/images/badges/made-with-ruby.svg)](https://forthebadge.com)
 
 > In this project, we attempted to implement some of the more popular methods in the Ruby enumerables method. These are:
 - #my_each
