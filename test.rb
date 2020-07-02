@@ -11,7 +11,6 @@ p my_array.my_each
 p(my_hash.my_each { |value| p value })
 p((1..10).my_each { |value| p value })
 
-
 puts '==========================this is my_select method'
 p(my_array.my_select { |value| value > 3 })
 p(my_hash.my_select { |_key, value| value > 1 })
@@ -28,10 +27,24 @@ p([nil, false].my_none?)
 p([nil, false, true].my_none?)
 p(%w[ant bear cat].none?(/d/) { |word| word.length >= 4 })
 
-
 puts '==========================this is my_count method'
 p(my_array.my_count)
 p(my_array.my_count(2))
 p(my_array.my_count { |x| (x % 2).zero? })
 p(my_array.my_count(2) { |value| value })
 p((1..10).my_count { |x| (x % 2).zero? })
+
+puts '==========================this is my_inject method'
+p(my_array.my_inject { |value| value * 2 })
+p((5..10).my_inject { |sum, n| sum + n })
+p((5..10).my_inject(1, :*))
+p((5..10).my_inject(1) { |product, n| product * n })
+longest = %w[cat mouse sheep bear banana].my_inject do |memo, word|
+  memo.length > word.length ? memo : word
+end
+p longest
+
+p my_array
+
+puts '==========================this is multiply_els method'
+p (my_array.multiply_els)

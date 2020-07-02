@@ -60,7 +60,7 @@ module Enumerable
   end
 
   def my_count (arg=nil)
-    count=[]
+     count=[]
     if block_given?
       self.my_each do |i|
         count.push(yield(i))
@@ -84,6 +84,30 @@ module Enumerable
 
     modified_array
   end
-
+  
+  def my_inject (*args)
+    arr = self.to_a
+    if block_given?
+      if args.empty?
+        acc = arr.first
+        for e in arr[1,arr.size]
+          acc = yield(acc, e)
+        end
+      else
+        acc = args[0]
+        for e in arr
+          acc = yield(acc, e)
+        end
+      end
+    else
+      self.to_enum
+    end
+    acc
+  end
  
+  
+  def multiply_els
+    my_inject { |i, a| i * a }
+  end
+  
 end
