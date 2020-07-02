@@ -18,13 +18,18 @@ module Enumerable
     self
   end
 
-  def my_all?
-    return to_enum(:my_each_with_index) unless block_given?
-
-    my_each do |i|
-      return false unless yield(i)
+  def my_all?(arg = nil)
+    if block_given?
+      my_each {|i| return false unless yield(i)}
+    elsif arg.nil?
+      my_each{|i| return false unless i}
+    elsif arg.class == class
+      my_each{|i| return false unless i.class <= arg}
+    elsif arg.class == Regexp
+      my_each{|i| return false unless i =~ arg}
+    else
+      my_each{|i| return false unless i == arg && i.class <= arg.class}
     end
-
     true
   end
 
