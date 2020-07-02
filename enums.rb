@@ -30,6 +30,7 @@ module Enumerable
     else
       my_each{|i| return false unless i == arg && i.class <= arg.class}
     end
+
     true
   end
 
@@ -43,11 +44,17 @@ module Enumerable
     new_array
   end
 
-  def my_any?
-    return to_enum(:my_each_with_index) unless block_given?
-
-    my_each do |i|
-      return true if yield(i)
+  def my_any?(arg = nil)
+    if block_given?
+      my_each {|i| return true unless yield(i)}
+    elsif arg.nil?
+      my_each{|i| return true unless i}
+    elsif arg.class == class
+      my_each{|i| return true unless i.class <= arg}
+    elsif arg.class == Regexp
+      my_each{|i| return true unless i =~ arg}
+    else
+      my_each{|i| return true unless i == arg && i.class <= arg.class}
     end
 
     false
