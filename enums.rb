@@ -22,13 +22,13 @@ module Enumerable
     if block_given?
       my_each {|i| return false unless yield(i)}
     elsif arg.nil?
-      my_each{|i| return false unless i}
-    elsif arg.class == class
-      my_each{|i| return false unless i.class <= arg}
+      my_each {|i| return false unless i}
+    elsif arg.class == Class
+      my_each {|i| return false unless i.class <= arg}
     elsif arg.class == Regexp
-      my_each{|i| return false unless i =~ arg}
+      my_each {|i| return false unless i =~ arg}
     else
-      my_each{|i| return false unless i == arg && i.class <= arg.class}
+      my_each {|i| return false unless i == arg && i.class <= arg.class}
     end
 
     true
@@ -48,13 +48,13 @@ module Enumerable
     if block_given?
       my_each {|i| return true unless yield(i)}
     elsif arg.nil?
-      my_each{|i| return true unless i}
-    elsif arg.class == class
-      my_each{|i| return true unless i.class <= arg}
+      my_each {|i| return true unless i}
+    elsif arg.class == Class
+      my_each {|i| return true unless i.class <= arg}
     elsif arg.class == Regexp
-      my_each{|i| return true unless i =~ arg}
+      my_each {|i| return true unless i =~ arg}
     else
-      my_each{|i| return true unless i == arg && i.class <= arg.class}
+      my_each {|i| return true unless i == arg && i.class <= arg.class}
     end
 
     false
@@ -87,11 +87,11 @@ module Enumerable
   end
 
   def my_map
+    return to_enum(:my_map) unless block_given?
+
     modified_array = []
 
-    my_each do |i|
-      modified_array << yield(i)
-    end
+    my_each {|i| modified_array << yield(i)}
 
     modified_array
   end
