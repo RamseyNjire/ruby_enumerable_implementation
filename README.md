@@ -1,10 +1,7 @@
 # Ruby Enumerable Module Partial Implementation
 
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
+[![Generic badge](https://img.shields.io/badge/<SUBJECT>-<STATUS>-<COLOR>.svg)](https://shields.io/)
 
 > In this project, we attempted to implement some of the more popular methods in the Ruby enumerables method. These are:
 - #my_each
