@@ -59,20 +59,19 @@ module Enumerable
     true
   end
 
-  def my_count (arg=nil)
-     count=[]
+  def my_count(arg = nil)
+    count = []
     if block_given?
-      self.my_each do |i|
+      my_each do |i|
         count.push(yield(i))
       end
-    elsif arg !=nil
-      self.my_select do |i|
-        count<<arg if arg==1
+    elsif !arg.nil?
+      my_select do |_i|
+        count << arg if arg == 1
       end
     else
-      self.length if arg==nil
+      length if arg.nil?
     end
-
   end
 
   def my_map
@@ -84,28 +83,27 @@ module Enumerable
 
     modified_array
   end
-  
-  def my_inject (*args)
-    arr = self.to_a
+
+  def my_inject(*args)
+    arr = to_a
     if block_given?
       if args.empty?
         acc = arr.first
-        for e in arr[1,arr.size]
+        arr[1, arr.size].each do |e|
           acc = yield(acc, e)
         end
       else
         acc = args[0]
-        for e in arr
+        arr.each do |e|
           acc = yield(acc, e)
         end
       end
     else
-      self.to_enum
+      to_enum
     end
     acc
   end
- 
-  
+
   def multiply_els
     my_inject { |i, a| i * a }
   end
