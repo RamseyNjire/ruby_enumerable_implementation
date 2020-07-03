@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Enumerable
   def my_each
     arr = self
@@ -13,26 +11,25 @@ module Enumerable
     arr = self
     return to_enum(:my_each) unless block_given?
 
-    arr.size.times {|i| yield(to_a[i], i)}
+    arr.size.times { |i| yield(to_a[i], i) }
 
     self
   end
 
   def my_all?(arg = nil)
-
     if block_given? && !arg.nil?
-      return false unless my_all?(arg) && my_all?
+     return false unless my_all?(arg) && my_all?
     end
     if block_given?
-      my_each {|i| return false unless yield(i)}
+      my_each { |i| return false unless yield(i) }
     elsif arg.nil?
-      my_each {|i| return false unless i}
+      my_each { |i| return false unless i }
     elsif arg.class == Class
-      my_each {|i| return false unless i.class <= arg}
+      my_each { |i| return false unless i.class <= arg }
     elsif arg.class == Regexp
-      my_each {|i| return false unless i =~ arg}
+      my_each { |i| return false unless i =~ arg }
     else
-      my_each {|i| return false unless i == arg && i.class <= arg.class}
+      my_each { |i| return false unless i == arg && i.class <= arg.class }
     end
 
     true
@@ -55,15 +52,15 @@ module Enumerable
     end
     
     if block_given?
-      my_each {|i| return true unless yield(i)}
+      my_each { |i| return true unless yield(i) }
     elsif arg.nil?
-      my_each {|i| return true unless i}
+      my_each { |i| return true unless i }
     elsif arg.class == Class
-      my_each {|i| return true unless i.class <= arg}
+      my_each { |i| return true unless i.class <= arg }
     elsif arg.class == Regexp
-      my_each {|i| return true unless i =~ arg}
+      my_each { |i| return true unless i =~ arg }
     else
-      my_each {|i| return true unless i == arg && i.class <= arg.class}
+      my_each { |i| return true unless i == arg && i.class <= arg.class }
     end
 
     false
