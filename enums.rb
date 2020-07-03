@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 module Enumerable
+
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
   def my_each
     arr = self
     return to_enum(:my_each) unless block_given?
@@ -104,6 +107,7 @@ module Enumerable
   end
 
   def my_inject(*arg)
+    # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
     raise LocalJumpError unless block_given? || !arg.empty?
 
     sym = arg.pop unless block_given?
