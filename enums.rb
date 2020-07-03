@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 module Enumerable
-
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_each
@@ -70,12 +69,12 @@ module Enumerable
     false
   end
 
-  def my_none?(_arg = nil)
+  def my_none?(arg = nil)
     my_each do |i|
       if block_given?
         return false if yield(i)
-      elsif _arg.class == Regexp
-        my_each { |i| return true unless i =~ _arg }
+      elsif arg.class == Regexp
+        my_each { |i| return true unless i =~ arg }
       else
         return false if !i.nil? && i != false
       end
