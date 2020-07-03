@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require_relative 'enums.rb'
 
 my_array = [1, 2, 3, 4, 5]

@@ -1,4 +1,6 @@
+# rubocop:disable ModuleLength
 module Enumerable
+  # rubocop:enable ModuleLength
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_each
@@ -73,7 +75,7 @@ module Enumerable
       if block_given?
         return false if yield(i)
       elsif arg.class == Regexp
-        my_each { |x| return true unless i =~ arg }
+        my_each { return true unless i =~ arg }
       elsif !i.nil? && i != false
       else
         return false
