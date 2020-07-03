@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Enumerable
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
@@ -12,10 +10,12 @@ module Enumerable
   end
 
   def my_each_with_index
-    arr = self
     return to_enum(:my_each) unless block_given?
 
-    arr.size.times { |i| yield(to_a[i], i) }
+    size.times do |i|
+      yield to_a[i], i
+    end
+    self
 
     self
   end
@@ -75,8 +75,9 @@ module Enumerable
         return false if yield(i)
       elsif arg.class == Regexp
         my_each { |i| return true unless i =~ arg }
+      elsif !i.nil? && i != false
       else
-        return false if !i.nil? && i != false
+       return false
       end
     end
     true
@@ -91,7 +92,7 @@ module Enumerable
         count += 1 if i == arg
       else
         count += 1
-          end
+      end
     end
     count
   end
