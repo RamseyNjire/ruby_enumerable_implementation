@@ -70,9 +70,11 @@ module Enumerable
   end
 
   def my_none?(_arg = nil)
-    my_each do |i|
+      my_each do |i|
       if block_given?
         return false if yield(i)
+      elsif _arg.class == Regexp
+        my_each {|i| return true unless i =~ _arg}        
       else
         return false if !i.nil? && i != false
       end
@@ -81,19 +83,19 @@ module Enumerable
   end
 
   def my_count(arg = nil)
-    count = []
-    if block_given?
-      my_each do |i|
-        count.push(yield(i))
-      end
-    elsif !arg.nil?
-      my_select do |_i|
-        count << arg if arg == 1
-      end
-    else
-      length if arg.nil?
-    end
+    count = 0
+    for i in self
+      if block_given?
+        count+=1 if yield(i) ==true
+        elsif arg !=nil
+          count+=1 if i==arg
+          else
+            count +=1
+          end
+        end
+    return count
   end
+   
 
   def my_map(&arg)
     
@@ -123,5 +125,7 @@ module Enumerable
   def multiply_els
     my_inject { |i, a| i * a }
   end
+
+  
   
 end

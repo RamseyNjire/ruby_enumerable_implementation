@@ -46,7 +46,6 @@ p([].my_none?)
 p([nil].my_none?)
 p([nil, false].my_none?)
 p([nil, false, true].my_none?)
-p(%w[ant bear cat].none?(/d/) { |word| word.length >= 4 })
 
 puts '==========================this is my_map method'
 p(my_array.my_map { |value| value * 2 })
