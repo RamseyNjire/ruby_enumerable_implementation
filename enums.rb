@@ -10,15 +10,19 @@ module Enumerable
   end
 
   def my_each_with_index
-    return to_enum(:my_each_with_index) unless block_given?
+    arr = self
+    return to_enum(:my_each) unless block_given?
 
-    my_each do |i|
-      yield(i, index(i))
-    end
+    arr.size.times {|i| yield(to_a[i], i)}
+
     self
   end
 
   def my_all?(arg = nil)
+
+    if block_given? && !arg.nil?
+      return false unless my_all?(arg) && my_all?
+    end
     if block_given?
       my_each {|i| return false unless yield(i)}
     elsif arg.nil?
@@ -45,6 +49,11 @@ module Enumerable
   end
 
   def my_any?(arg = nil)
+    
+    if block_given? && !arg.nil?
+      return true unless my_any?(arg) && my_any?
+    end
+    
     if block_given?
       my_each {|i| return true unless yield(i)}
     elsif arg.nil?
@@ -86,12 +95,13 @@ module Enumerable
     end
   end
 
-  def my_map
+  def my_map(&arg)
+    
+
     return to_enum(:my_map) unless block_given?
 
     modified_array = []
-
-    my_each {|i| modified_array << yield(i)}
+    my_each {|i| modified_array << arg.call(i)}
 
     modified_array
   end
