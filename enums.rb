@@ -99,7 +99,6 @@ module Enumerable
 
   def my_map(&arg)
     
-
     return to_enum(:my_map) unless block_given?
 
     modified_array = []
