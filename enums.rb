@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Enumerable
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
@@ -75,7 +73,7 @@ module Enumerable
       if block_given?
         return false if yield(i)
       elsif arg.class == Regexp
-        my_each { |i| return true unless i =~ arg }
+        my_each { |x| return true unless i =~ arg }
       elsif !i.nil? && i != false
       else
         return false
