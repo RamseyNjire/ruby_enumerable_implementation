@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Enumerable
   def my_each
     arr = self
@@ -18,7 +20,7 @@ module Enumerable
 
   def my_all?(arg = nil)
     if block_given? && !arg.nil?
-     return false unless my_all?(arg) && my_all?
+      return false unless my_all?(arg) && my_all?
     end
     if block_given?
       my_each { |i| return false unless yield(i) }
@@ -46,11 +48,10 @@ module Enumerable
   end
 
   def my_any?(arg = nil)
-    
     if block_given? && !arg.nil?
       return true unless my_any?(arg) && my_any?
     end
-    
+
     if block_given?
       my_each { |i| return true unless yield(i) }
     elsif arg.nil?
@@ -67,11 +68,11 @@ module Enumerable
   end
 
   def my_none?(_arg = nil)
-      my_each do |i|
+    my_each do |i|
       if block_given?
         return false if yield(i)
       elsif _arg.class == Regexp
-        my_each {|i| return true unless i =~ _arg}        
+        my_each { |i| return true unless i =~ _arg }
       else
         return false if !i.nil? && i != false
       end
@@ -81,25 +82,23 @@ module Enumerable
 
   def my_count(arg = nil)
     count = 0
-    for i in self
+    each do |i|
       if block_given?
-        count+=1 if yield(i) ==true
-        elsif arg !=nil
-          count+=1 if i==arg
-          else
-            count +=1
+        count += 1 if yield(i) == true
+      elsif !arg.nil?
+        count += 1 if i == arg
+      else
+        count += 1
           end
-        end
-    return count
+    end
+    count
   end
-   
 
   def my_map(&arg)
-    
     return to_enum(:my_map) unless block_given?
 
     modified_array = []
-    my_each {|i| modified_array << arg.call(i)}
+    my_each { |i| modified_array << arg.call(i) }
 
     modified_array
   end
@@ -116,12 +115,9 @@ module Enumerable
       my_array.my_each { |el| memo = memo.send(sym, el) }
     end
     memo
-  end  
+  end
 
   def multiply_els
     my_inject { |i, a| i * a }
   end
-
-  
-  
 end

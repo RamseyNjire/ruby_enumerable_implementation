@@ -6,7 +6,7 @@ my_array = [1, 2, 3, 4, 5]
 my_hash = { x: 1, y: 2, z: 3 }
 my_text = %w[ant bear cat]
 
-arg = Proc.new {|value| value * 2}
+arg = proc { |value| value * 2 }
 
 puts '==========================this is my each method'
 p my_array.my_each
