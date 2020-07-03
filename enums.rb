@@ -1,11 +1,14 @@
+# frozen_string_literal: true
+
 module Enumerable
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_each
-    arr = self
     return to_enum(:my_each) unless block_given?
 
-    arr.size.times { |i| yield(to_a[i]) }
+    size.times do |i|
+      yield to_a[i]
+    end
     self
   end
 
@@ -15,8 +18,6 @@ module Enumerable
     size.times do |i|
       yield to_a[i], i
     end
-    self
-
     self
   end
 
@@ -77,7 +78,7 @@ module Enumerable
         my_each { |i| return true unless i =~ arg }
       elsif !i.nil? && i != false
       else
-       return false
+        return false
       end
     end
     true
