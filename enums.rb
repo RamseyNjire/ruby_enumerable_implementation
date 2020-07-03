@@ -1,6 +1,6 @@
-# rubocop:disable ModuleLength
+# rubocop:disable Metrics/ModuleLength
 module Enumerable
-  # rubocop:enable ModuleLength
+  # rubocop:enable Metrics/ModuleLength
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def my_each
