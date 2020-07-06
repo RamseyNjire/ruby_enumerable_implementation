@@ -126,5 +126,3 @@ module Enumerable
     my_inject { |i, a| i * a }
   end
 end
-
-
