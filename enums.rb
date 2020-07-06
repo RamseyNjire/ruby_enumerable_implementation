@@ -66,20 +66,25 @@ module Enumerable
     else
       my_each { |i| return true if i == arg && i.class <= arg.class }
     end
-
     false
   end
 
   def my_none?(arg = nil)
-    my_each do |i|
-      if block_given?
-        return false if yield(i)
-      elsif arg.class == Regexp
-        my_each { return true unless i =~ arg }
-      elsif !i.nil? && i != false
-      else
-        return false
+    if block_given? && !arg.nil?
+      return true if my_none?(arg) && my_none?
+    end
+    if block_given?
+      my_each { |i| return false if yield(i) }
+    elsif arg.nil?
+      my_each { |i| return false if i }
+    elsif arg.class == Class
+      my_each do |i|
+        return false if i.class <= arg
       end
+    elsif arg.class == Regexp
+      my_each { |i| return false if i =~ arg }
+    else
+      my_each { |i| return false if i == arg && i.class <= arg.class }
     end
     true
   end
