@@ -126,3 +126,7 @@ module Enumerable
     my_inject { |i, a| i * a }
   end
 end
+
+my_proc = Proc.new {|num| num > 10}
+
+p([18, 22, 5, 6].my_map(my_proc){|num| num > 10})
