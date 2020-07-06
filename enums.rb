@@ -98,12 +98,13 @@ module Enumerable
     count
   end
 
-  def my_map(&arg)
-    return to_enum(:my_map) unless block_given?
-
+  def my_map(arg)
     modified_array = []
-    my_each { |i| modified_array << arg.call(i) }
-
+    if block_given? && arg.class == Proc
+      my_each { |i| modified_array << arg.call(i) }
+    elsif block_given?
+      my_each { |i| modified_array << yield(i) }
+    end
     modified_array
   end
 
@@ -126,7 +127,3 @@ module Enumerable
     my_inject { |i, a| i * a }
   end
 end
-
-my_proc = Proc.new {|num| num > 10}
-
-p([18, 22, 5, 6].my_map(my_proc){|num| num > 10})
