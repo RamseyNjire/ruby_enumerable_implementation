@@ -52,19 +52,19 @@ module Enumerable
 
   def my_any?(arg = nil)
     if block_given? && !arg.nil?
-      return true unless my_any?(arg) && my_any?
+      return true if my_any?(arg) && my_any?
     end
 
     if block_given?
-      my_each { |i| return true unless yield(i) }
+      my_each { |i| return true if yield(i) }
     elsif arg.nil?
-      my_each { |i| return true unless i }
+      my_each { |i| return true if i }
     elsif arg.class == Class
-      my_each { |i| return true unless i.class <= arg }
+      my_each { |i| return true if i.class <= arg }
     elsif arg.class == Regexp
-      my_each { |i| return true unless i =~ arg }
+      my_each { |i| return true if i =~ arg }
     else
-      my_each { |i| return true unless i == arg && i.class <= arg.class }
+      my_each { |i| return true if i == arg && i.class <= arg.class }
     end
 
     false
@@ -126,3 +126,5 @@ module Enumerable
     my_inject { |i, a| i * a }
   end
 end
+
+
