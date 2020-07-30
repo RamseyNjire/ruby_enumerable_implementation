@@ -6,6 +6,7 @@ describe Enumerable do
   let(:my_range)  {(1..10) }
   let(:my_string) { %w[ant bear cat] }
   let(:my_proc) {proc | value | value * 2 }
+  longest = %w[cat mouse sheep bear banana]
 
   describe '#my_each' do
     context 'when the method is called using a block ' do
@@ -119,22 +120,44 @@ describe Enumerable do
   end
 
   describe '#my_count' do
-    context 'when a block is given ' do
-      it 'my_count with any argument' do
-        expect(my_array.my_count).to eq(5)
-      end 
+  context 'when a block is given ' do
+    it 'my_count with any argument' do
+      expect(my_array.my_count).to eq(5)
+    end 
+  end
+    it 'my_count with a number argument' do
+      expect(my_array.my_count(2)). to eq(1)
     end
-      it 'my_count with a number argument' do
-        expect(my_array.my_count(2)). to eq(1)
-      end
-      it 'when no block is given ruby adds implicit block' do
-        expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(2)
-      end
-      it 'when no block is given ruby adds implicit block' do
-        expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(2)
-      end
-      it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
-        expect(my_array.my_count { |value| value }).to eq(0)
-      end
-  end    
+    it 'when no block is given ruby adds implicit block' do
+      expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(2)
+    end
+    it 'when no block is given ruby adds implicit block' do
+      expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(2)
+    end
+    it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
+      expect(my_array.my_count { |value| value }).to eq(my_array.my_count { |value| value })
+    end
+
+  end
+  #describe '#my_inject' do
+    #context 'when a block is given ' do
+      #it 'my_inject with a block multiply' do
+        #expect(my_array.my_inject {|value| value * 2}).to eq(16)
+      #end
+      #it 'my_inject with a block sum' do
+        #expect(my_array.my_inject{ |sum, n| sum + n }.to eq(45)
+      #end 
+      #it 'my_inject with a block and return the longest string' do
+        #expect(longest.my_inject { |product, n| product * n }.to eq('bana')
+      #end
+   
+      
+      #it 'when no block is given and use 2 arguments' do
+        #expect(my_range.my_inject ((1, :*)).to eq(151200)
+      #end
+      #it 'when no block is given and reduce to one number' do
+        #expect(my_range.my_inject(1)).to eq(151200)
+      #end
+    #end
+  #end   
 end
