@@ -1,3 +1,4 @@
+
 # rubocop:disable Metrics/ModuleLength
 module Enumerable
   # rubocop:enable Metrics/ModuleLength
@@ -127,7 +128,6 @@ module Enumerable
     end
     memo
   end
-  def multiply_els(arg)
-    arg.my_inject { |i, a| i * a }
-  end
+
 end
+
