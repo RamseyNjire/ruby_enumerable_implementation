@@ -1,11 +1,11 @@
 require_relative '../enums.rb'
 
-describe Enumerable do  
+describe Enumerable do
   let(:my_array) { [1, 2, 3, 4, 5] }
-  let(:my_hash) {{ x: 1, y: 2, z: 3 }}
-  let(:my_range)  {(1..10) }
+  let(:my_hash) { { x: 1, y: 2, z: 3 } }
+  let(:my_range)  { (1..10) }
   let(:my_string) { %w[ant bear cat] }
-  let(:my_proc) {proc | value | value * 2 }
+  let(:my_proc) { proc | value | value * 2 }
   # let(:my_longest) = %w[cat mouse sheep bear banana]
 
   describe '#my_each' do
@@ -45,10 +45,10 @@ describe Enumerable do
   describe '#my_select' do
     context 'when the method is called using a block ' do
       it 'returns an array with the elements which pass the condition ' do
-        expect(my_array.my_select { |i| i >3 }).to eq(my_array.select { |i| i >3 })
+        expect(my_array.my_select { |i| i > 3 }).to eq(my_array.select { |i| i > 3 })
       end
       it 'returns an array with the elements which pass the condition' do
-        expect(my_range.my_select { |i| i >3 }).to eq(my_range.select { |i| i>3 })
+        expect(my_range.my_select { |i| i > 3 }).to eq(my_range.select { |i| i > 3 })
       end
       it 'returns an enumerable if the block is not given. ' do
         expect(my_array.my_select).to be_an Enumerator
@@ -89,7 +89,7 @@ describe Enumerable do
         expect(my_array.any?).to eq(true)
       end
       it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
-        expect(my_array.any?{ |value| value == 10 }).to eq(false)
+        expect(my_array.any? { |value| value == 10 }).to eq(false)
       end
       it 'the method returns a true value if all elements pass the condition (string)' do
         expect(my_array.any?(/t/) { |value| value >= 2 }).to eq(false)
@@ -111,7 +111,7 @@ describe Enumerable do
         expect(my_array.my_none?).to eq(false)
       end
       it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
-        expect(my_array.my_none?{ |value| value == 10 }).to eq(true)
+        expect(my_array.my_none? { |value| value == 10 }).to eq(true)
       end
       it 'the method returns a true value if all elements pass the condition (string)' do
         expect(my_array.my_none?(/t/) { |value| value >= 2 }).to eq(false)
@@ -120,45 +120,44 @@ describe Enumerable do
   end
 
   describe '#my_count' do
-  context 'when a block is given ' do
-    it 'my_count with any argument' do
-      expect(my_array.my_count).to eq(my_array.count)
-    end 
-  end
+    context 'when a block is given ' do
+      it 'my_count with any argument' do
+        expect(my_array.my_count).to eq(my_array.count)
+      end
+    end
     it 'my_count with a number argument' do
       expect(my_array.my_count(2)). to eq(my_array.count(2))
     end
     it 'when no block is given ruby adds implicit block' do
-      expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(my_array.count{ |x| (x % 2).zero? })
+      expect(my_array.my_count { |x| (x % 2).zero? }).to eq(my_array.count { |x| (x % 2).zero? })
     end
     it 'when no block is given ruby adds implicit block' do
-      expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(my_array.count{ |x| (x % 2).zero? })
+      expect(my_array.my_count { |x| (x % 2).zero? }).to eq(my_array.count { |x| (x % 2).zero? })
     end
     it 'when no block is given ruby adds implicit block' do
-      expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(my_array.count{ |x| (x % 2).zero? })
+      expect(my_array.my_count { |x| (x % 2).zero? }).to eq(my_array.count { |x| (x % 2).zero? })
     end
     it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
       expect(my_array.my_count { |value| value }).to eq(my_array.count { |value| value })
     end
-
   end
   describe '#my_inject' do
     context 'when a block is given ' do
       it 'my_inject with a block multiply' do
-        expect(my_array.my_inject {|value| value * 2}).to eq(my_array.my_inject {|value| value * 2})
+        expect(my_array.my_inject { |value| value * 2 }).to eq(my_array.my_inject { |value| value * 2 })
       end
       it 'my_inject with a block addition' do
-        expect(my_range.my_inject {|value| value + 2}).to eq(my_range.inject {|value| value + 2})
+        expect(my_range.my_inject { |value| value + 2 }).to eq(my_range.inject { |value| value + 2 })
       end
       it 'my_inject with two arguments' do
         expect(my_range.my_inject(1, :*)).to eq(my_range.inject(1, :*))
       end
       it 'my_inject with an argument and a block to multiply' do
-        expect(my_range.my_inject(1){|product, n| product * n}).to eq(my_range.inject(1){|product, n|product * n})
+        expect(my_range.my_inject(1) { |product, n| product * n }).to eq(my_range.inject(1) { |product, n| product * n })
       end
       it 'my_inject with checks for the longest word in an array' do
-        expect(my_string.my_inject{|memo, word| memo.length > word.length ? memo : word}).to eq(my_string.inject{|memo, word| memo.length > word.length ? memo : word})
+        expect(my_string.my_inject { |memo, word| memo.length > word.length ? memo : word }).to eq(my_string.inject { |memo, word| memo.length > word.length ? memo : word })
       end
-    end     
-  end   
+    end
+  end
 end

@@ -1,4 +1,3 @@
-
 # rubocop:disable Metrics/ModuleLength
 module Enumerable
   # rubocop:enable Metrics/ModuleLength
@@ -113,7 +112,6 @@ module Enumerable
     cont1
   end
 
-
   def my_map(&arg)
     return to_enum(:my_map) unless block_given?
 
@@ -137,9 +135,8 @@ module Enumerable
     end
     memo
   end
+
   def multiply_els
     my_inject { |i, a| i * a }
   end
-
 end
-
