@@ -118,11 +118,23 @@ describe Enumerable do
     end
   end
 
-  describe '#my_count?' do
+  describe '#my_count' do
     context 'when a block is given ' do
-      it 'returns the given array with the modified elements (numbers)' do
-        expect(my_array.my_count).to eq(my_array.my_count)
-      end      
+      it 'my_count with any argument' do
+        expect(my_array.my_count).to eq(5)
+      end 
+      it 'my_count with a number argument' do
+        expect(my_array.my_count(2)). to eq(1)
+      end
+    end
+    context 'when a block is given ' do
+      it 'when no block is given ruby adds implicit block' do
+        expect(my_array.my_count{ |x| (x % 2).zero? }).to eq(2)
+      end
+      it 'the method returns true when any value passes the condition ortherwise returns false (numbers)' do
+        expect(my_array.my_count { |value| value }).to eq(5)
+      end
+    end     
     end
   end
 end
