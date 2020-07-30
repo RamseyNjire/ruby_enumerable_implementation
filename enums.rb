@@ -128,6 +128,9 @@ module Enumerable
     end
     memo
   end
+  def multiply_els
+    my_inject { |i, a| i * a }
+  end
 
 end
 
