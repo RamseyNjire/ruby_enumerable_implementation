@@ -11,13 +11,13 @@ describe Enumerable do
   describe '#my_each' do
     context 'when the method is called using a block ' do
       it 'runs block for each element in the variable, passing it as an argument and returning an array' do
-        expect(my_array.my_each { |i| my_array[i] }).to eq(my_array.my_each { |i| my_array[i] })
+        expect(my_array.my_each { |i| my_array[i] }).to eq(my_array.each { |i| my_array[i] })
       end
       it 'runs block for each element in the variable, passing it as an argument and returning an hash' do
-        expect(my_hash.my_each { |i| i }).to eq(my_hash.my_each { |i| i })
+        expect(my_hash.my_each { |i| i }).to eq(my_hash.each { |i| i })
       end
       it 'runs block for each element in the range, passing it as an argument and returning an range' do
-        expect(my_range.my_each { |i| i }).to eq(my_range.my_each { |i| i })
+        expect(my_range.my_each { |i| i }).to eq(my_range.each { |i| i })
       end
       it 'returns an enumerable if the block is not given. ' do
         expect(my_array.my_each).to be_an Enumerator
@@ -28,13 +28,13 @@ describe Enumerable do
   describe '#my_each_with_index' do
     context 'when the method is called using a block ' do
       it 'runs a block a code for an array and returns an element and index ' do
-        expect(my_array.my_each_with_index { |k, v| k + v }).to eq(my_array.my_each_with_index { |k, v| k + v })
+        expect(my_array.my_each_with_index { |k, v| k + v }).to eq(my_array.each_with_index { |k, v| k + v })
       end
       it 'runs a block a code for an hash and returns an element and index' do
-        expect(my_hash.my_each_with_index { |k, v| k.to_s + v.to_s }).to eq(my_hash.my_each_with_index { |k, v| k.to_s + v.to_s })
+        expect(my_hash.my_each_with_index { |k, v| k.to_s + v.to_s }).to eq(my_hash.each_with_index { |k, v| k.to_s + v.to_s })
       end
       it 'runs a block a code for an range and returns an element and index' do
-        expect(my_range.my_each_with_index { |k, v| k + v }).to eq(my_range.my_each_with_index { |k, v| k + v })
+        expect(my_range.my_each_with_index { |k, v| k + v }).to eq(my_range.each_with_index { |k, v| k + v })
       end
       it 'returns an enumerable if the block is not given. ' do
         expect(my_array.my_each_with_index).to be_an Enumerator
@@ -45,10 +45,10 @@ describe Enumerable do
   describe '#my_select' do
     context 'when the method is called using a block ' do
       it 'returns an array with the elements which pass the condition ' do
-        expect(my_array.my_select { |i| i >3 }).to eq(my_array.my_select { |i| i >3 })
+        expect(my_array.my_select { |i| i >3 }).to eq(my_array.select { |i| i >3 })
       end
       it 'returns an array with the elements which pass the condition' do
-        expect(my_range.my_select { |i| i >3 }).to eq(my_range.my_select { |i| i>3 })
+        expect(my_range.my_select { |i| i >3 }).to eq(my_range.select { |i| i>3 })
       end
       it 'returns an enumerable if the block is not given. ' do
         expect(my_array.my_select).to be_an Enumerator
@@ -122,7 +122,7 @@ describe Enumerable do
   describe '#my_count' do
   context 'when a block is given ' do
     it 'my_count with any argument' do
-      expect(my_array.my_count).to eq(my_array.my_count)
+      expect(my_array.my_count).to eq(my_array.count)
     end 
   end
     it 'my_count with a number argument' do

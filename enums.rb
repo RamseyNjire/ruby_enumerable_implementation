@@ -90,18 +90,27 @@ module Enumerable
     true
   end
 
-  def my_count(arg = nil)
-    count = 0
-    each do |i|
-      if block_given?
-        count += 1 if yield(i) == true
-      elsif !arg.nil?
-        count += 1 if i == arg
-      else
-        count += 1
+  def my_count(*arg)
+    return 'error arguments' if arg.length > 1
+
+    cont1 = 0
+    array = to_a
+    if block_given?
+      array.length.times do |a|
+        array[a]
+        cont1 += 1 if yield (array[a])
+        next
+      end
+      return cont1
+    else
+      return array.length if arg.empty?
+
+      array.length.times do |a|
+        cont1 += 1 if array[a].eql?(arg[0])
+        next
       end
     end
-    count
+    cont1
   end
 
 
