@@ -103,13 +103,13 @@ module Enumerable
     count
   end
 
-  def my_map(arg)
+
+  def my_map(&arg)
+    return to_enum(:my_map) unless block_given?
+
     modified_array = []
-    if block_given? && arg.class == Proc
-      my_each { |i| modified_array << arg.call(i) }
-    elsif block_given?
-      my_each { |i| modified_array << yield(i) }
-    end
+    my_each { |i| modified_array << arg.call(i) }
+
     modified_array
   end
 
@@ -126,5 +126,8 @@ module Enumerable
       my_array.my_each { |el| memo = memo.send(sym, el) }
     end
     memo
+  end
+  def multiply_els(arg)
+    arg.my_inject { |i, a| i * a }
   end
 end
