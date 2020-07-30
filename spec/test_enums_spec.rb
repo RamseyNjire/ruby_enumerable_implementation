@@ -1,12 +1,12 @@
 require_relative '../enums.rb'
 
+# rubocop:disable Layout/LineLength
 describe Enumerable do
   let(:my_array) { [1, 2, 3, 4, 5] }
   let(:my_hash) { { x: 1, y: 2, z: 3 } }
-  let(:my_range)  { (1..10) }
+  let(:my_range) { (1..10) }
   let(:my_string) { %w[ant bear cat] }
   let(:my_proc) { proc | value | value * 2 }
-  # let(:my_longest) = %w[cat mouse sheep bear banana]
 
   describe '#my_each' do
     context 'when the method is called using a block ' do
@@ -14,10 +14,10 @@ describe Enumerable do
         expect(my_array.my_each { |i| my_array[i] }).to eq(my_array.each { |i| my_array[i] })
       end
       it 'runs block for each element in the variable, passing it as an argument and returning an hash' do
-        expect(my_hash.my_each { |i| i }).to eq(my_hash.each { |i| i })
+        expect(my_hash.my_each { |a| p a }).to eq(my_hash.each { |u| p u })
       end
       it 'runs block for each element in the range, passing it as an argument and returning an range' do
-        expect(my_range.my_each { |i| i }).to eq(my_range.each { |i| i })
+        expect(my_range.my_each { |e| p e }).to eq(my_range.each { |a| p a })
       end
       it 'returns an enumerable if the block is not given. ' do
         expect(my_array.my_each).to be_an Enumerator
@@ -161,3 +161,4 @@ describe Enumerable do
     end
   end
 end
+# rubocop:enable Layout/LineLength
